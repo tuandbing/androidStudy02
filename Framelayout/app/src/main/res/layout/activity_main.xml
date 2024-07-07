@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--后面添加的会对前面的进行覆盖-->
+
+    <!--
+        foreground: 设置前景
+        foregroundGravity: 设置前景位置
+    -->
+
+    <FrameLayout
+        android:layout_width="400dp"
+        android:background="#FFFF0000"
+        android:layout_height="400dp"/>
+
+    <FrameLayout
+        android:layout_width="300dp"
+        android:background="#FF00FF00"
+        android:layout_height="300dp"/>
+
+    <FrameLayout
+        android:layout_width="200dp"
+        android:background="#FF0000FF"
+        android:layout_height="200dp"/>
+
+</FrameLayout>
