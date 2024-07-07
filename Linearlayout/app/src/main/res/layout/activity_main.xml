@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--orientation:
+        布局中组件的排列方式
+        vertical(竖直排列)
+        horizontal(水平排列, 默认值)-->
+
+<!--gravity:
+        控制组件所包含的子元素的对其方式, 可多个组合, 多个组合间使用 || 间隔
+        如: android:gravity="center_horizontal||bottom"-->
+
+<!--divider:
+        分割线(但是需要给出图片作为分隔标志)
+        android:divider="@drawable/baseline_drag_handle_24"
+        需要与showDividers一起使用-->
+
+<!--showDividers:
+        设置分割线所在的位置
+        none(无)
+        beginning(开始)
+        end(结束)
+        middle(每两个组件之间)-->
+
+<!--dividerPadding:
+        设置分割线的padding-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:showDividers="middle"
+    android:dividerPadding="20dp"
+    android:orientation="vertical">
+
+    <!--layout_gravity:
+            控制改组件在父容器里的对其方式, 不会超出父容器-->
+
+    <!--layout_weight:
+        等比例划分(剩余的区域), 与排列方式相关
+        如当前红色高度: (总高度-80 * 3) * (2 / 4) + 80-->
+
+    <LinearLayout
+        android:background="#ffff0000"
+        android:layout_width="80dp"
+        android:layout_weight="2"
+        android:layout_height="80dp"/>
+
+    <!--分割线的其它方式(较常用)-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ffff00f0"/>
+
+    <LinearLayout
+        android:background="#ff00ff00"
+        android:layout_width="80dp"
+        android:layout_weight="1"
+        android:layout_height="80dp"/>
+
+    <!--分割线的其它方式(较常用)-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <LinearLayout
+        android:background="#ff0000ff"
+        android:layout_width="80dp"
+        android:layout_weight="1"
+        android:layout_height="80dp"/>
+
+</LinearLayout>
