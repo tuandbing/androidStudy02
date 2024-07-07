@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+
+    GridLayout比tableLayout要方便, 不仅能够合并列单元格, 也可以合并行单元格
+    此外还可以不需要单独设置tableRow
+
+    不设置属性时, 默认是显示在同一行且不换行
+
+    orientation:    设置水平显示还是垂直显示
+        horizontal: 水平显示(默认)
+        vertical:   竖直显示
+
+    columnCount:    设置每一行显示的个数(与显示方式相关)
+
+    rowCount:       设置每一列显示的个数(与显示方式相关)
+
+-->
+
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+
+    <!--
+        子控件属性
+
+        设置位置时可以覆盖其它空间
+
+        1. layout_column    显示在第几列
+        2. layout_columnSpan    横向跨几列
+        3. layout_columnWeight  横向剩余空间分配方式
+        4. layout_gravity   在网格中的显示位置
+        7. layout_row    显示在第几行
+        8. layout_rowSpan    纵向跨几行
+        9. layout_rowWeight  纵向剩余空间分配方式
+
+    -->
+
+    <Button
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn01"
+        />
+    <Button
+        android:layout_column="0"
+        android:layout_row="1"
+        android:layout_columnSpan="2"
+        android:layout_gravity="fill_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn02"
+        />
+    <Button
+        android:layout_column="1"
+        android:layout_row="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn03"
+        />
+    <Button
+        android:layout_columnWeight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn04"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn05"
+        />
+
+
+</GridLayout>
