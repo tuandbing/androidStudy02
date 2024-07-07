@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--RelativeLayout:
+        相对布局, 默认为左上角开始
+        不作处理的话, 后面新加的组件会对已有的组件进行覆盖-->
+
+    <!--定位方式:
+            1. 根据父容器定位
+            2. 根据兄弟组件定位-->
+
+    <!--根据父容器定位:
+            1. layout_alignParentRight  右对齐     现在使用 layout_alignParentEnd
+            2. layout_alignParentLeft  左对齐      现在使用 layout_alignParentStart
+            3. layout_alignParentTop  顶部对齐
+            4. layout_alignParentBottom  底部对齐
+            5. layout_centerHorizontal  水平居中
+            6. layout_centerVertical  垂直居中
+            7. layout_centerInParent  中间位置-->
+
+    <!--根据兄弟组件定位:
+            1. layout_toLeftOf  放置于参考组件的左边      现在使用 layout_toStartOf
+            2. layout_toRightOf  放置于参考组件的右边      现在使用 layout_toEndOf
+            3. layout_above  放置于参考组件的上方
+            4. layout_below  放置于参考组件的下方
+            5. layout_alignTop  放置于参考组件的上边界
+            6. layout_alignBottom  放置于参考组件的下边界
+            7. layout_alignLeft  放置于参考组件的左边界      现在使用 layout_alignStart
+            8. layout_alignRight  放置于参考组件的左边界      现在使用 layout_alignEnd
+            -->
+
+
+    <RelativeLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@color/black" />
+
+    <RelativeLayout
+        android:layout_alignParentEnd="true"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@color/green" />
+
+</RelativeLayout>
