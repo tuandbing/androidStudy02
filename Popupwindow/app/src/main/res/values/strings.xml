@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Popupwindow</string>
+    <string name="btn_v">弹出PopupWindow</string>
+    <string name="btn01_v">上海</string>
+    <string name="btn02_v">北京</string>
+</resources>

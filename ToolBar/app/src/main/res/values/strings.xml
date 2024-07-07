@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ToolBar</string>
+    <string name="title">标题</string>
+    <string name="subtitle">子标题</string>
+</resources>

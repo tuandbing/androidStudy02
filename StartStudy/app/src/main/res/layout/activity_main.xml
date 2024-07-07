@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--LinearLayout: 容器-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--TextView: 控件-->
+    <!--match_parent:
+            与容器大小一致
+        wrap_content:
+            根据文本内容自动分配长度, 但是不会超过容器的长度
+        直接写数字: 指定大小(单位: dp)
+        textStyle:
+            设置字体风格:
+                normal(无效果, 默认值)
+                bold(加粗)
+                italic(斜体)
+        textSize:
+            设置字体大小, 为了适应各个屏幕的大小, 一般使用sp为单位
+        background:
+            控件的背景颜色, 可以是图片
+        gravity:
+            设置控件中内容的对其方向
+                TextView中是文字
+                ImageView中是图片等
+                center_horizontal: 水平居中
+                center_vertical: 竖直居中
+                center: 水平和竖直都居中
+            -->
+    <!--注意: 一般text和color不在此处写出(具体描述),
+                在res的values中声明, 在此处调用-->
+
+    <!--设置阴影效果
+        shadowColor: 设置阴影颜色, 需要和shadowRadius一起使用才生效
+        shadowRadius: 设置阴影的模糊程度, 0.1为字体颜色, 建议使用3.0
+        shadowDx: 设置阴影在水平方向的偏移
+        shadowDy: 设置阴影在竖直方向的偏移
+        -->
+
+    <!--实现跑马灯效果
+        singleLine: 内容单行显示
+        focusable: 是否可以获取焦点
+        focusableInTouchMode: 用于控制视图在触摸模式下是否可以聚焦
+        ellipsize: 在哪里省略文本
+        marqueeRepeatLimit: 字母动画重复的次数
+
+        直接打开的话是不会跑起来的, 因为没有获得焦点
+        方法一: 设置可以点击
+            android:clickable="true"
+        方法二: 使用自定义控件
+        方法三: 在控件中使用requestFocus标签
+        -->
+    <TextView
+        android:id="@+id/tv_one"
+        android:layout_width="match_parent"
+        android:layout_height="122dp"
+        android:gravity="center_horizontal"
+        android:text="@string/tv_one"
+        android:textSize="30sp"
+        android:shadowColor="@color/red"
+        android:shadowRadius="3.0"
+        android:shadowDx="5.0"
+        android:shadowDy="5.0"
+        android:textStyle="italic"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:singleLine="true"
+        android:translationY="20dp">
+        <requestFocus/>
+    </TextView>
+
+    <!--自定义控件-->
+<!--    <com.example.leo_androidbasis.MyTextView
+        android:id="@+id/tv_one"
+        android:layout_width="match_parent"
+        android:layout_height="122dp"
+        android:gravity="center_horizontal"
+        android:text="@string/tv_one"
+        android:textSize="30sp"
+        android:shadowColor="@color/red"
+        android:shadowRadius="3.0"
+        android:shadowDx="5.0"
+        android:shadowDy="5.0"
+        android:textStyle="italic"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:singleLine="true"
+        android:translationY="20dp" />-->
+</LinearLayout>

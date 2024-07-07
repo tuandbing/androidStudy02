@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AlertDialog</string>
+    <string name="btn_v">显示对话框</string>
+    <string name="tv_v">hello world</string>
+</resources>
