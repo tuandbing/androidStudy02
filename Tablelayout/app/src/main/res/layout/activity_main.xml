@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    以下方法均支持多个序号同时隐藏, 使用','分隔
+    collapseColumns
+        设置需要被隐藏的列的序号, 从0开始
+
+    下面两种方法可用性待定, 测试时出现了bug
+        1. 当有剩余空间时, 并没有出现拉伸的现象
+        2. 即使没有超出, 也会出现收缩的现象
+
+
+    stretchColumns
+        设置允许被拉伸的列的列序号, 从0开始
+        注意: 拉伸需要又剩余空间, 即有被隐藏的空间
+    shrinkColumns
+        设置允许被收缩的列的列序号, 从0开始
+        注意: 收缩需要有超出才能进行
+-->
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <!--默认情况下是一个控件就会占用一行, 即使设置了layout_width也没有用
+        可以与标签TableRow使用
+        TableRow中为一行显示的控件, 即使超出, 也不会自动换行, 超出部分直接不显示-->
+    <TableRow>
+
+        <!--
+            子控件的属性
+            layout_column:  显示在第几列
+            layout_span:    横向跨几列(合并单元格, 此时该空间序号会相应的发生变化===>添加所合并的列序号)
+        -->
+
+        <Button
+            android:layout_column="1"
+            android:layout_span="2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn01"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn02"/>
+    </TableRow>
+
+    <TableRow>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn01"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn02"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn03"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn04"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn05"/>
+
+    </TableRow>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn01"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn02"/>
+
+</TableLayout>
