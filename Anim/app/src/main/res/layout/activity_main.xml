@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--由于frame是一个单独的xml文件, 可以用作一个背景图片来处理-->
+<!--没有启动的情况下, 动画是不会变化的-->
+<RelativeLayout
+    android:id="@+id/rv"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+</RelativeLayout>

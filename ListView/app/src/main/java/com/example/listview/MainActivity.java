@@ -17,7 +17,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<Bean> data = new ArrayList<>();
+    private final List<Bean> data = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.lv);
 
+        // Adapter  适配器
+        // 适配器的作用就是在数据和视图之间建立一种桥梁，类似一个转换器，能够将复杂的数据转换成用户可以接受的方式进行呈现
         listView.setAdapter(new MyAdapter(data, this));
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

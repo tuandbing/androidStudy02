@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--duration: 一张图片显示的时间, 单位为ms-->
+    <item android:drawable="@drawable/picture01" android:duration="120"/>
+    <item android:drawable="@drawable/picture02" android:duration="120"/>
+    <item android:drawable="@drawable/picture03" android:duration="120"/>
+    <item android:drawable="@drawable/picture04" android:duration="120"/>
+    <item android:drawable="@drawable/picture05" android:duration="120"/>
+    <item android:drawable="@drawable/picture06" android:duration="120"/>
+    <item android:drawable="@drawable/picture07" android:duration="120"/>
+    <item android:drawable="@drawable/picture08" android:duration="120"/>
+
+</animation-list>

@@ -28,7 +28,7 @@ public class MyAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return data.get(position);
     }
 
     @Override
@@ -36,6 +36,26 @@ public class MyAdapter extends BaseAdapter {
         return position;
     }
 
+    //  getView的作用:
+    //      填充每个item的可视内容并返回
+    //      负责给每个item填充内容，并且返回视图对象
+
+    /*
+        深入理解:   https://blog.csdn.net/chenyantc02/article/details/103939451
+            每当某个item进入到可视区域，就会自动调用getView方法来填充数据并绘制
+            1.getView方法是由系统自动回调的方法,每当可视区域内需要刷新一个item时就会被调用
+                用来填充item内容、绑定事件等其他操作。
+            2.参数position是系统回调getView方法时自动传入的
+                代表当前刷新的item的索引号下标从0开始。
+            3.界面启动时,自动调用getView方法传入的convertView均为null; 根据代码逻辑
+                if(convertView == null){
+                    convertView = View.inflate(MainActivity.this,R.layout.item_view,null);
+                    findViews(ics,convertView);
+                    convertView.setTag(ics);
+                }
+            当convertView为null时就是调用View.inflate给其赋值.
+            4.每当某个item进入到可视区域,就会自动调用getView方法来填充数据并绘制View。
+    */
     /*@Override
     public View getView(int position, View view, ViewGroup parent) {
 

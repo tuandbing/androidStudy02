@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--translate: 平移
+    fromXDelta: 初始X值
+    fromYDelta: 初始Y值
+    toXDelta: 最终X值
+    toYDelta: 最终Y值
+    duration: 平移时间
+    -->
+    <translate
+        android:fromXDelta="0"
+        android:fromYDelta="0"
+        android:toXDelta="200"
+        android:toYDelta="200"
+        android:duration="2000"
+        />
+</set>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--alpha: 透明度
+    fromAlpha: 初始值
+    toAlpha: 最终值
+    duration: 动画时长
+    -->
+    <alpha
+        android:fromAlpha="0"
+        android:toAlpha="1"
+        android:duration="2000"/>
+
+</set>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--scale: 缩放
+    fromXScale: 初始X大小
+    fromYScale: 初始Y大小
+    toXScale: 最终X大小
+    toYScale: 最终Y大小
+    pivotX: 缩放中心
+    pivotY: 缩放中心
+    duration: 缩放时长
+    -->
+
+    <scale
+        android:fromXScale="1"
+        android:fromYScale="1"
+        android:toXScale="0.5"
+        android:toYScale="0.5"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:duration="2000"
+        />
+
+</set>
