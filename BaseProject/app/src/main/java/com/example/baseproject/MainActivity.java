@@ -18,11 +18,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
-        getNextPage();
+        setContentView(R.layout.activity_button);
+        /*setContentView(R.layout.activity_main);
+        getNextPage();*/
     }
 
-    private Runnable mGoNext = new Runnable() {
+    /*private Runnable mGoNext = new Runnable() {
         @Override
         public void run() {
 
@@ -44,5 +45,5 @@ public class MainActivity extends AppCompatActivity {
         // postDelayed(@NonNull Runnable r, long delayMillis)
         // Runnable 一个线程对象, 定义了线程的执行体, 此处也可以直接使用函数
         new Handler().postDelayed(mGoNext, 3000);
-    }
+    }*/
 }

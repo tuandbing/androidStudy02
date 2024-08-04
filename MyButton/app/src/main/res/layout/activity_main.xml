@@ -25,6 +25,5 @@
         android:shadowColor="#FFFF0000"
         android:shadowRadius="3.0"
         android:shadowDy="10"
-        android:shadowDx="10"
-        />
+        android:shadowDx="10"/>
 </LinearLayout>
