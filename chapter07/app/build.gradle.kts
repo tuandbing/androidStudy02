@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-    namespace = "com.example.viewpage"
+    namespace = "com.example.chapter07"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.viewpage"
-        minSdk = 24
+        applicationId = "com.example.chapter07"
+        minSdk = 27
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -29,10 +29,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-
-
 }
-
 
 dependencies {
 
