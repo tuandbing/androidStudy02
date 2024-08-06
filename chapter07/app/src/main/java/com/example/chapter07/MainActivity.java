@@ -321,3 +321,78 @@ public class MainActivity extends AppCompatActivity {
 
 }
 */
+
+public class MainActivity extends AppCompatActivity {
+
+
+    private List<String> tabList;
+
+    private List<View> pageList;
+
+    private View view1, view2, view3, view4;
+
+    private PagerAdapter adapter = new PagerAdapter() {
+
+        @Override
+        public int getCount() {
+            return pageList != null ? pageList.size() : 0;
+        }
+
+        @Override
+        public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+            return view == object;
+        }
+
+        @NonNull
+        @Override
+        public Object instantiateItem(@NonNull ViewGroup container, int position) {
+            container.addView(pageList.get(position));
+            return pageList.get(position);
+        }
+
+        @Override
+        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+            container.removeView(pageList.get(position));
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return tabList.get(position);
+        }
+    };
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main04);
+        ViewPager viewPager = findViewById(R.id.viewPager);
+        tabList = new ArrayList<>();
+        pageList = new ArrayList<>();
+        /*view1 = LayoutInflater.from(getApplication()).inflate(R.layout.layout1, null);
+        view2 = LayoutInflater.from(getApplication()).inflate(R.layout.layout2, null);
+        view3 = LayoutInflater.from(getApplication()).inflate(R.layout.layout3, null);
+        view4 = LayoutInflater.from(getApplication()).inflate(R.layout.layout4, null);*/
+
+        // 两种方法都可以获取LayoutInflater对象
+        view1 = getLayoutInflater().inflate(R.layout.layout1, null);
+        view2 = getLayoutInflater().inflate(R.layout.layout2, null);
+        view3 = getLayoutInflater().inflate(R.layout.layout3, null);
+        view4 = getLayoutInflater().inflate(R.layout.layout4, null);
+
+        pageList.add(view1);
+        pageList.add(view2);
+        pageList.add(view3);
+        pageList.add(view4);
+
+        tabList.add("毕业格言1");
+        tabList.add("毕业格言2");
+        tabList.add("毕业格言3");
+        tabList.add("毕业格言4");
+
+        viewPager.setAdapter(adapter);
+
+
+    }
+}
+
