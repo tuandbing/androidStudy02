@@ -2,6 +2,7 @@ package com.example.chapter07;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -142,27 +144,7 @@ public class MainActivity extends AppCompatActivity {
     private View view1,view2,view3,view4;   //4个页面视图
     private List<View> viewList;             //保存页面的数组列表
     private ViewPager viewPager;             //ViewPager组件
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main03);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);      //设置全屏显示
-        LayoutInflater lf = getLayoutInflater().from(this);        //获取布局填充器
-        viewPager= findViewById(R.id.viewPager);     //获取ViewPager组件
-        view1 = lf.inflate(R.layout.layout1, null);      //加载页面1的布局文件
-        view2 = lf.inflate(R.layout.layout2, null);      //加载页面2的布局文件
-        view3 = lf.inflate(R.layout.layout3, null);      //加载页面3的布局文件
-        view4 = lf.inflate(R.layout.layout4, null);      //加载页面4的布局文件
-        viewList = new ArrayList<>();                 //创建保存4个页面的数组列表
-        viewList.add(view1);                              //向数组列表中添加第1个页面
-        viewList.add(view2);                              //向数组列表中添加第2个页面
-        viewList.add(view3);                              //向数组列表中添加第3个页面
-        viewList.add(view4);                              //向数组列表中添加第4个页面
-        viewPager.setAdapter(adapter);                    //设置适配器
 
-
-    }
     PagerAdapter adapter = new PagerAdapter() {             //创建适配器
         @Override
         public int getCount() {         //获取页面个数
@@ -186,13 +168,39 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main03);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);      //设置全屏显示
+
+        //获取布局填充器
+        LayoutInflater lf = getLayoutInflater().from(this);
+
+        //获取ViewPager组件
+        viewPager= findViewById(R.id.viewPager);
+        view1 = lf.inflate(R.layout.layout1, null);      //加载页面1的布局文件
+        view2 = lf.inflate(R.layout.layout2, null);      //加载页面2的布局文件
+        view3 = lf.inflate(R.layout.layout3, null);      //加载页面3的布局文件
+        view4 = lf.inflate(R.layout.layout4, null);      //加载页面4的布局文件
+        viewList = new ArrayList<>();                 //创建保存4个页面的数组列表
+        viewList.add(view1);                              //向数组列表中添加第1个页面
+        viewList.add(view2);                              //向数组列表中添加第2个页面
+        viewList.add(view3);                              //向数组列表中添加第3个页面
+        viewList.add(view4);                              //向数组列表中添加第4个页面
+        viewPager.setAdapter(adapter);                    //设置适配器
+
+    }
+
     public void onEnter(View view){         //第4个页面中按钮单击事件方法
         //创建Intent跳转主界面2中
         Intent intent=new Intent(MainActivity.this,Main2Activity.class);
         startActivity(intent);      //启动Intent
     }
 
-}*/
+}
+*/
 
 // 案例4(可以翻页的标题栏)
 /*
@@ -290,6 +298,7 @@ public class MainActivity extends AppCompatActivity {
 */
 
 // 案例6(模拟微信表情商店选项卡)
+/*
 public class MainActivity extends AppCompatActivity {
     private TabHost tabHost;                                       //声明TabHost组件的对象
     @Override
@@ -311,5 +320,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
-
-
+*/

@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.WindowManager;
 
-public class Main2Activity extends Activity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class Main2Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
