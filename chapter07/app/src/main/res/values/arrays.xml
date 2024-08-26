@@ -12,4 +12,20 @@
         <item>游戏/应用</item>
         <item>活动</item>
     </string-array>
+    <string-array name="uname">
+        <item>全部</item>
+        <item>张三</item>
+        <item>李四</item>
+        <item>王五</item>
+        <item>赵六</item>
+        <item>钱七</item>
+        <item>孙八</item>
+        <item>周九</item>
+        <item>吴十</item>
+        <item>郑十一</item>
+        <item>王十二</item>
+        <item>李十三</item>
+        <item>张十四</item>
+        <item>李十五</item>
+    </string-array>
 </resources>
