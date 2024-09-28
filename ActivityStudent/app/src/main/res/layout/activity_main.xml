@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#BA8AB8BD"
+    android:stretchColumns="2"
+    tools:context=".MainActivity">
+
+    <LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="@string/title"
+            android:textSize="30sp"
+            android:gravity="center"
+            android:padding="10dp"
+            />
+    </LinearLayout>
+
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="@string/sid"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:padding="10dp"
+            />
+
+        <EditText
+            android:id="@+id/sid"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="top|left"
+            android:hint="@string/getSid"
+            android:inputType="number"
+            android:padding="10dp"
+            android:textSize="20sp" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="@string/name"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:padding="10dp"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/name"
+            android:hint="@string/getName"
+            android:inputType="text"
+            android:gravity="top|left"
+            android:textSize="20sp"
+            android:padding="10dp"
+            />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="@string/sex"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:padding="10dp"
+            />
+        <RadioGroup
+            android:id="@+id/sex"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:id="@+id/man"
+                android:text="@string/man"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/woman"
+                android:text="@string/woman"/>
+        </RadioGroup>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/academy"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/academy"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:entries="@array/academy" />
+    </TableRow>
+
+    <LinearLayout
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/submit"
+            android:id="@+id/submit"
+            android:textSize="20sp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp"
+            />
+
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:text="@string/reset"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+
+</TableLayout>

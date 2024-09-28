@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/edtName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/name" />
+
+        <EditText
+            android:id="@+id/edtStudentID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="@string/sid"
+            android:inputType="number" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_height="50dp">
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/radioGroupGender"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbtnMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="@string/male" />
+
+                <RadioButton
+                    android:id="@+id/rbtnFemale"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/female" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <Spinner
+            android:layout_marginTop="20dp"
+            android:id="@+id/spnCollege"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <Spinner
+            android:layout_marginTop="20dp"
+            android:id="@+id/spnMajor"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="30sp"
+                android:text="@string/hobby" />
+            <CheckBox
+                android:id="@+id/chkLiterature"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_height="match_parent"
+                android:text="@string/Literature" />
+
+            <CheckBox
+                android:id="@+id/chkSports"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/Sports" />
+
+            <CheckBox
+                android:id="@+id/chkMusic"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/Music" />
+
+            <CheckBox
+                android:id="@+id/chkArt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/Art" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center">
+            <Button
+                android:id="@+id/btnSubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:text="@string/Submit" />
+
+            <Button
+                android:id="@+id/btnReset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="@string/Reset" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

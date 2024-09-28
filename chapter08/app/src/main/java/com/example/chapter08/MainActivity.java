@@ -167,19 +167,28 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main01);
-
-        TextView password = (TextView) findViewById(R.id.wang_mima);//获取布局文件中的忘记密码
-        password.setOnClickListener(new View.OnClickListener() {  //为忘记密码添加单击监听事件
+        setContentView(R.layout.activity_main03);
+        Button button= (Button) findViewById(R.id.btn);	        //获取选择头像按钮
+        button.setOnClickListener(new View.OnClickListener() {  //为按钮添加单击事件
             @Override
             public void onClick(View v) {
                 //创建Intent对象
-                Intent intent = new Intent(MainActivity.this, PasswordActivity.class);
-                startActivity(intent); //启动Activity
+                Intent intent=new Intent(MainActivity.this,HeadActivity.class);
+                startActivityForResult(intent, 0x11);            //启动intent对应的Activity
             }
         });
+
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==0x11 && resultCode==0x11){  //判断是否为待处理的结果
+            Bundle bundle=data.getExtras();          //获取传递的数据包
+            int imageId=bundle.getInt("imageId");   //获取选择的头像ID
+            //获取布局文件中添加的ImageView组件
+            ImageView iv=(ImageView)findViewById(R.id.imageView);
+            iv.setImageResource(imageId);           //显示选择的头像
+        }
+    }
 }
-

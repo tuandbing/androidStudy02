@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="college_array">
+        <item>学院</item>
+        <item>计算机学院</item>
+        <item>电气学院</item>
+        <item>机械学院</item>
+        <item>材料学院</item>
+        <item>化学学院</item>
+    </string-array>
+
+    <string-array name="major_computer_array">
+        <item>专业</item>
+        <item>软件工程</item>
+        <item>计算机科学与技术</item>
+        <item>通信工程</item>
+    </string-array>
+
+    <string-array name="major_electric_array">
+        <item>专业</item>
+        <item>电气工程</item>
+        <item>电机工程</item>
+        <item>自动化</item>
+        <item>控制工程</item>
+    </string-array>
+    <string-array name="major_mechanic_array">
+        <item>专业</item>
+        <item>机械工程</item>
+        <item>汽车工程</item>
+        <item>汽车电子工程</item>
+        <item>汽车维修工程</item>
+    </string-array>
+    <string-array name="major_material_array">
+        <item>专业</item>
+        <item>材料工程</item>
+        <item>材料物理工程</item>
+    </string-array>
+    <string-array name="major_chemistry_array">
+        <item>专业</item>
+        <item>化学工程</item>
+        <item>化学工程与工艺</item>
+        <item>化学工程与信息工程</item>
+    </string-array>
+    <string-array name="no_college_array">
+        <item>请先选择学院</item>
+    </string-array>
+</resources>
