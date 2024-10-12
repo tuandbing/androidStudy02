@@ -1,7 +1,10 @@
 package com.example.studentmgr;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -10,7 +13,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.util.ArrayList;
 
@@ -30,6 +35,8 @@ public class ActivityMain extends AppCompatActivity {
         lvwStudent = findViewById(R.id.lvwStudent);
         logout = findViewById(R.id.logout);
         studentList = new ArrayList<>();
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, studentList);
         lvwStudent.setAdapter(adapter);
@@ -45,11 +52,21 @@ public class ActivityMain extends AppCompatActivity {
         lvwStudent.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                studentList.remove(i);
-                adapter.notifyDataSetChanged();
-                return false;
+                new AlertDialog.Builder(ActivityMain.this)
+                        .setTitle("确认删除")
+                        .setMessage("确认删除该学生记录吗？")
+                        .setPositiveButton("删除", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                studentList.remove(i);
+                                adapter.notifyDataSetChanged();
+                            }
+                        })
+                        .setNegativeButton("取消", null)
+                        .show();
+                return true;
             }
         });
+
         logout.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -91,5 +108,27 @@ public class ActivityMain extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.menu_add){
+            Intent intent = new Intent(ActivityMain.this, ActivityStudent.class);
+            startActivityForResult(intent, 1);
+            return true;
+        }else if ( item.getItemId() == R.id.menu_refresh) {
+            Toast.makeText(this, "列表已刷新", Toast.LENGTH_SHORT).show();
+            return true;
+        }else{
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
 
 }

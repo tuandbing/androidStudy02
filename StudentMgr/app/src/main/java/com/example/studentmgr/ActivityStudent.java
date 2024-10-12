@@ -7,6 +7,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -28,6 +29,8 @@ public class ActivityStudent extends AppCompatActivity {
     private Spinner spnCollege, spnMajor;
     private CheckBox chkLiterature, chkSports, chkMusic, chkArt;
     private Button btnSubmit, btnReset;
+    private DatePicker datePicker;
+    private int day, month, year;
 
     private ArrayAdapter<CharSequence> adapterCollege, adapterMajorComputer, adapterMajorElectric, adapterMajorMechanic, adapterMajorMaterial, adapterMajorChemistry, adapterNoCo;
 
@@ -49,6 +52,7 @@ public class ActivityStudent extends AppCompatActivity {
         chkArt = findViewById(R.id.chkArt);
         btnSubmit = findViewById(R.id.btnSubmit);
         btnReset = findViewById(R.id.btnReset);
+        datePicker = findViewById(R.id.datePicker);
 
         adapterCollege = ArrayAdapter.createFromResource(this, R.array.college_array, android.R.layout.simple_spinner_item);
         adapterCollege.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -120,6 +124,10 @@ public class ActivityStudent extends AppCompatActivity {
                 String college = spnCollege.getSelectedItem().toString();
                 String major = spnMajor.getSelectedItem().toString();
                 StringBuilder hobbies = new StringBuilder();
+                day = datePicker.getDayOfMonth();
+                month = datePicker.getMonth();
+                year = datePicker.getYear();
+
                 if (chkLiterature.isChecked()) hobbies.append(chkLiterature.getText().toString()).append(" ");
                 if (chkSports.isChecked()) hobbies.append(chkSports.getText().toString()).append(" ");
                 if (chkMusic.isChecked()) hobbies.append(chkMusic.getText().toString()).append("").append(" ");
@@ -132,8 +140,8 @@ public class ActivityStudent extends AppCompatActivity {
                         Toast.makeText(ActivityStudent.this, "学号重复，请重新输入", Toast.LENGTH_SHORT).show();
                     }else{
                         sids.add(studentID);
-                        String studentInfo = String.format("姓名: %s\n学号: %s\n性别: %s\n学院: %s\n专业: %s\n爱好: %s",
-                                name, studentID, gender, college, major, hobbies.toString());
+                        String studentInfo = String.format("姓名: %s\n学号: %s\n性别: %s\n学院: %s\n专业: %s\n爱好: %s\n生日: %d年%d%月d日",
+                                name, studentID, gender, college, major, hobbies.toString(), year, month+1, day);
 
                         Intent resultIntent = new Intent();
                         resultIntent.putExtra("studentInfo", studentInfo);

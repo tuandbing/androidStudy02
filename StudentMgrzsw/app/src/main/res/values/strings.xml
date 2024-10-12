@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">StudentMgr</string>
-    <string-array name="college_array">
-        <item>计算机学院</item>
-        <item>电气学院</item>
-    </string-array>
-</resources>

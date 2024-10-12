@@ -35,6 +35,8 @@ public class ActivityLogin extends AppCompatActivity {
         passwordEditText = findViewById(R.id.password);
         progressBar = findViewById(R.id.progressBar);
         loginButton = findViewById(R.id.loginButton);
+        usernames.add("123");
+        passwords.add("123");
         register = findViewById(R.id.register);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
