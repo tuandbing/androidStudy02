@@ -2,6 +2,7 @@ package com.example.studentmgr;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,15 +18,16 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ActivityStudent extends AppCompatActivity {
 
+    private static final String TAG = "ActivityStudent";
     private static List<String> sids = new ArrayList<>();
 
     private EditText edtName, edtStudentID;
     private RadioGroup radioGroupGender;
-    private RadioButton rbtnMale, rbtnFemale;
     private Spinner spnCollege, spnMajor;
     private CheckBox chkLiterature, chkSports, chkMusic, chkArt;
     private Button btnSubmit, btnReset;
@@ -38,12 +40,15 @@ public class ActivityStudent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student);
+        initializeViews();
+        setupAdapters();
+        setupListeners();
+    }
 
+    private void initializeViews() {
         edtName = findViewById(R.id.edtName);
         edtStudentID = findViewById(R.id.edtStudentID);
         radioGroupGender = findViewById(R.id.radioGroupGender);
-        rbtnMale = findViewById(R.id.rbtnMale);
-        rbtnFemale = findViewById(R.id.rbtnFemale);
         spnCollege = findViewById(R.id.spnCollege);
         spnMajor = findViewById(R.id.spnMajor);
         chkLiterature = findViewById(R.id.chkLiterature);
@@ -53,7 +58,9 @@ public class ActivityStudent extends AppCompatActivity {
         btnSubmit = findViewById(R.id.btnSubmit);
         btnReset = findViewById(R.id.btnReset);
         datePicker = findViewById(R.id.datePicker);
+    }
 
+    private void setupAdapters() {
         adapterCollege = ArrayAdapter.createFromResource(this, R.array.college_array, android.R.layout.simple_spinner_item);
         adapterCollege.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnCollege.setAdapter(adapterCollege);
@@ -75,22 +82,31 @@ public class ActivityStudent extends AppCompatActivity {
 
         adapterNoCo = ArrayAdapter.createFromResource(this, R.array.no_college_array, android.R.layout.simple_spinner_item);
         adapterNoCo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    }
 
+    private void setupListeners() {
         spnCollege.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 1) {
-                    spnMajor.setAdapter(adapterMajorComputer);
-                } else if (position == 2){
-                    spnMajor.setAdapter(adapterMajorElectric);
-                }else if (position == 3){
-                    spnMajor.setAdapter(adapterMajorMechanic);
-                }else if (position == 4){
-                    spnMajor.setAdapter(adapterMajorMaterial);
-                }else if (position == 5){
-                    spnMajor.setAdapter(adapterMajorChemistry);
-                }else{
-                    spnMajor.setAdapter(adapterNoCo);
+                switch (position) {
+                    case 1:
+                        spnMajor.setAdapter(adapterMajorComputer);
+                        break;
+                    case 2:
+                        spnMajor.setAdapter(adapterMajorElectric);
+                        break;
+                    case 3:
+                        spnMajor.setAdapter(adapterMajorMechanic);
+                        break;
+                    case 4:
+                        spnMajor.setAdapter(adapterMajorMaterial);
+                        break;
+                    case 5:
+                        spnMajor.setAdapter(adapterMajorChemistry);
+                        break;
+                    default:
+                        spnMajor.setAdapter(adapterNoCo);
+                        break;
                 }
             }
 
@@ -102,54 +118,73 @@ public class ActivityStudent extends AppCompatActivity {
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edtName.setText("");
-                edtStudentID.setText("");
-                radioGroupGender.check(R.id.rbtnMale);
-                spnCollege.setSelection(0);
-                spnMajor.setSelection(0);
-                chkLiterature.setChecked(false);
-                chkSports.setChecked(false);
-                chkMusic.setChecked(false);
-                chkArt.setChecked(false);
-                Toast.makeText(ActivityStudent.this, "重置成功", Toast.LENGTH_SHORT).show();
+                resetFields();
             }
         });
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = edtName.getText().toString();
-                String studentID = edtStudentID.getText().toString();
-                String gender = ((RadioButton)findViewById(radioGroupGender.getCheckedRadioButtonId())).getText().toString();
-                String college = spnCollege.getSelectedItem().toString();
-                String major = spnMajor.getSelectedItem().toString();
-                StringBuilder hobbies = new StringBuilder();
-                day = datePicker.getDayOfMonth();
-                month = datePicker.getMonth();
-                year = datePicker.getYear();
-
-                if (chkLiterature.isChecked()) hobbies.append(chkLiterature.getText().toString()).append(" ");
-                if (chkSports.isChecked()) hobbies.append(chkSports.getText().toString()).append(" ");
-                if (chkMusic.isChecked()) hobbies.append(chkMusic.getText().toString()).append("").append(" ");
-                if (chkArt.isChecked()) hobbies.append(chkArt.getText().toString()).append(" ");
-
-                if(name.isEmpty() || studentID.isEmpty() || college.equals("学院") || major.equals("专业") || hobbies.length() == 0){
-                    Toast.makeText(ActivityStudent.this, "请将信息补充完整", Toast.LENGTH_SHORT).show();
-                }else{
-                    if(!sids.isEmpty() && sids.contains(studentID)){
-                        Toast.makeText(ActivityStudent.this, "学号重复，请重新输入", Toast.LENGTH_SHORT).show();
-                    }else{
-                        sids.add(studentID);
-                        String studentInfo = String.format("姓名: %s\n学号: %s\n性别: %s\n学院: %s\n专业: %s\n爱好: %s\n生日: %d年%d%月d日",
-                                name, studentID, gender, college, major, hobbies.toString(), year, month+1, day);
-
-                        Intent resultIntent = new Intent();
-                        resultIntent.putExtra("studentInfo", studentInfo);
-                        setResult(RESULT_OK, resultIntent);
-                        finish();
-                    }
-                }
+                handleSubmit();
             }
         });
     }
+
+    private void resetFields() {
+        edtName.setText("");
+        edtStudentID.setText("");
+        radioGroupGender.check(R.id.rbtnMale);
+        spnCollege.setSelection(0);
+        spnMajor.setSelection(0);
+        chkLiterature.setChecked(false);
+        chkSports.setChecked(false);
+        chkMusic.setChecked(false);
+        chkArt.setChecked(false);
+        Toast.makeText(ActivityStudent.this, "重置成功", Toast.LENGTH_SHORT).show();
+    }
+
+    private void handleSubmit() {
+        String name = edtName.getText().toString().trim();
+        String studentID = edtStudentID.getText().toString().trim();
+        String gender = ((RadioButton) findViewById(radioGroupGender.getCheckedRadioButtonId())).getText().toString();
+        String college = spnCollege.getSelectedItem().toString();
+        String major = spnMajor.getSelectedItem().toString();
+        StringBuilder hobbies = new StringBuilder();
+        day = datePicker.getDayOfMonth();
+        month = datePicker.getMonth();
+        year = datePicker.getYear();
+
+        if (chkLiterature.isChecked()) hobbies.append(chkLiterature.getText().toString()).append(" ");
+        if (chkSports.isChecked()) hobbies.append(chkSports.getText().toString()).append(" ");
+        if (chkMusic.isChecked()) hobbies.append(chkMusic.getText().toString()).append(" ");
+        if (chkArt.isChecked()) hobbies.append(chkArt.getText().toString()).append(" ");
+
+        if (name.isEmpty() || studentID.isEmpty() || college.equals("学院") || major.equals("专业") || hobbies.length() == 0) {
+            Toast.makeText(ActivityStudent.this, "请将信息补充完整", Toast.LENGTH_SHORT).show();
+            Log.w(TAG, "Incomplete information entered");
+        } else {
+            if (!sids.isEmpty() && sids.contains(studentID)) {
+                Toast.makeText(ActivityStudent.this, "学号重复，请重新输入", Toast.LENGTH_SHORT).show();
+                Log.w(TAG, "Duplicate student ID entered");
+            } else {
+                sids.add(studentID);
+
+                // Create a Student object and pass it back
+                String date = year + "-" + month + "-" + day;  // Adjust year for Date constructor
+                String hobbiesStr = hobbies.toString().trim();
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("name", name);
+                resultIntent.putExtra("studentID", studentID);
+                resultIntent.putExtra("gender", gender);
+                resultIntent.putExtra("college", college);
+                resultIntent.putExtra("major", major);
+                resultIntent.putExtra("birthDate", date);
+                resultIntent.putExtra("hobbies", hobbiesStr);
+                Utils.showCustomToast(this, "学生记录添加成功");
+                setResult(RESULT_OK, resultIntent);
+                finish();
+            }
+        }
+    }
 }
+

@@ -1,6 +1,9 @@
 package com.example.studentmgr;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Student implements Serializable {
     private String name;
@@ -8,8 +11,9 @@ public class Student implements Serializable {
     private String gender;
     private String college;
     private String major;
-    private int profileImageResId;
+    private Date birthDate;
     private String hobbies;
+    private static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public String getHobbies() {
         return hobbies;
@@ -59,21 +63,14 @@ public class Student implements Serializable {
         this.major = major;
     }
 
-    public int getProfileImageResId() {
-        return profileImageResId;
-    }
 
-    public void setProfileImageResId(int profileImageResId) {
-        this.profileImageResId = profileImageResId;
-    }
-
-    public Student(String name, String id, String gender, String college, String major, int profileImageResId, String hobbies) {
+    public Student(String name, String id, String gender, String college, String major, Date birthDate, String hobbies) {
         this.name = name;
         this.id = id;
         this.gender = gender;
         this.college = college;
         this.major = major;
-        this.profileImageResId = profileImageResId;
+        this.birthDate = birthDate;
         this.hobbies = hobbies;
     }
 
@@ -82,14 +79,26 @@ public class Student implements Serializable {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "name='" + name + '\'' +
-                ", id='" + id + '\'' +
-                ", gender='" + gender + '\'' +
-                ", college='" + college + '\'' +
-                ", major='" + major + '\'' +
-                ", profileImageResId=" + profileImageResId +
-                ", hobbies='" + hobbies + '\'' +
-                '}';
+
+        String msg = "name=" + name + '\n' +
+                "id=" + id + '\n' +
+                "gender=" + gender + '\n' +
+                "college=" + college + '\n' +
+                "major=" + major + '\n';
+        if (birthDate != null) {
+            msg += "birthDate=" + dateFormat.format(birthDate) + '\n';
+        } else {
+            msg += "birthDate=null\n";
+        }
+        msg += "hobbies=" + hobbies;
+        return msg;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 }

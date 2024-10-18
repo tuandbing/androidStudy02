@@ -13,7 +13,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ActivityLogin extends AppCompatActivity {
 
@@ -22,9 +24,10 @@ public class ActivityLogin extends AppCompatActivity {
     private ProgressBar progressBar;
     private Button loginButton;
     private Button register;
+    private Map<String, String> userInfo = new HashMap<>();
 
-    private static List<String> usernames = new ArrayList<>();
-    private static List<String> passwords = new ArrayList<>();
+//    private static List<String> usernames = new ArrayList<>();
+//    private static List<String> passwords = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +38,9 @@ public class ActivityLogin extends AppCompatActivity {
         passwordEditText = findViewById(R.id.password);
         progressBar = findViewById(R.id.progressBar);
         loginButton = findViewById(R.id.loginButton);
-        usernames.add("123");
-        passwords.add("123");
+        /*usernames.add("123");
+        passwords.add("123");*/
+        userInfo.put("123", "123");
         register = findViewById(R.id.register);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -58,21 +62,21 @@ public class ActivityLogin extends AppCompatActivity {
     private void handleLogin() {
         progressBar.setVisibility(View.VISIBLE);
         loginButton.setEnabled(false);
-
-        new Handler().postDelayed(new Runnable() {
+        validateCredentials();
+/*        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 validateCredentials();
             }
-        }, 3000); // 3 seconds delay
+        }, 3000); // 3 seconds delay*/
     }
 
     private void validateCredentials() {
         String username = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
-        if (usernames.contains(username) && passwords.contains(password)) {
-            Intent intent = new Intent(ActivityLogin.this, ActivityMain.class);
+        if (userInfo.containsKey(username) && userInfo.get(username).equals(password)) {
+            Intent intent = new Intent(ActivityLogin.this, ActivityAds.class);
             startActivity(intent);
             finish();
         } else {
@@ -88,8 +92,7 @@ public class ActivityLogin extends AppCompatActivity {
         if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
             String username = data.getStringExtra("username");
             String password = data.getStringExtra("password");
-            usernames.add(username);
-            passwords.add(password);
+            userInfo.put(username, password);
         }
     }
 }

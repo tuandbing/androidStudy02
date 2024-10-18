@@ -7,6 +7,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -14,6 +15,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ActivityEdit extends AppCompatActivity {
 
@@ -23,7 +28,8 @@ public class ActivityEdit extends AppCompatActivity {
     private Spinner spnCollege, spnMajor;
     private CheckBox chkLiterature, chkSports, chkMusic, chkArt;
     private Button btnSubmit, btnReset;
-    private int flag = 0;
+    private DatePicker datePicker;
+    private int day, month, year;
 
     private ArrayAdapter<CharSequence> adapterCollege, adapterMajorComputer, adapterMajorElectric, adapterMajorMechanic, adapterMajorMaterial, adapterMajorChemistry, adapterNoCo;
 
@@ -47,6 +53,7 @@ public class ActivityEdit extends AppCompatActivity {
         chkArt = findViewById(R.id.chkArt);
         btnSubmit = findViewById(R.id.btnSubmit);
         btnReset = findViewById(R.id.btnReset);
+        datePicker = findViewById(R.id.datePicker);
 
         adapterCollege = ArrayAdapter.createFromResource(this, R.array.college_array, android.R.layout.simple_spinner_item);
         adapterCollege.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -70,108 +77,125 @@ public class ActivityEdit extends AppCompatActivity {
         adapterNoCo = ArrayAdapter.createFromResource(this, R.array.no_college_array, android.R.layout.simple_spinner_item);
         adapterNoCo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        btnReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                edtName.setText("");
-                edtStudentID.setText("");
-                radioGroupGender.check(R.id.rbtnMale);
-                spnCollege.setSelection(0);
-                spnMajor.setSelection(0);
-                chkLiterature.setChecked(false);
-                chkSports.setChecked(false);
-                chkMusic.setChecked(false);
-                chkArt.setChecked(false);
-                Toast.makeText(ActivityEdit.this, "重置成功", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name = edtName.getText().toString();
-                String studentID = edtStudentID.getText().toString();
-                String gender = ((RadioButton) findViewById(radioGroupGender.getCheckedRadioButtonId())).getText().toString();
-                String college = spnCollege.getSelectedItem().toString();
-                String major = spnMajor.getSelectedItem().toString();
-                StringBuilder hobbies = new StringBuilder();
-                if (chkLiterature.isChecked())
-                    hobbies.append(chkLiterature.getText().toString()).append(" ");
-                if (chkSports.isChecked())
-                    hobbies.append(chkSports.getText().toString()).append(" ");
-                if (chkMusic.isChecked())
-                    hobbies.append(chkMusic.getText().toString()).append("").append(" ");
-                if (chkArt.isChecked()) hobbies.append(chkArt.getText().toString()).append(" ");
-
-                if (name.isEmpty() || studentID.isEmpty() || college.equals("学院") || major.equals("专业") || hobbies.length() == 0) {
-                    Toast.makeText(ActivityEdit.this, "请将信息补充完整", Toast.LENGTH_SHORT).show();
-                } else {
-                    String studentInfo = String.format("姓名: %s\n学号: %s\n性别: %s\n学院: %s\n专业: %s\n爱好: %s",
-                            name, studentID, gender, college, major, hobbies.toString());
-                    Intent resultIntent = new Intent();
-                    resultIntent.putExtra("studentInfo", studentInfo);
-                    setResult(RESULT_OK, resultIntent);
-                    finish();
-                }
-
-            }
-        });
         Intent intent = getIntent();
+        studentIndex = intent.getIntExtra("studentIndex", -1);
 
         String name = intent.getStringExtra("name");
         String studentID = intent.getStringExtra("studentID");
         String gender = intent.getStringExtra("gender");
         String college = intent.getStringExtra("college");
         String major = intent.getStringExtra("major");
-        StringBuilder hobbies = new StringBuilder(intent.getStringExtra("hobbies"));
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String birthDate = dateFormat.format(intent.getSerializableExtra("birthDate"));
+        String hobbies = intent.getStringExtra("hobbies");
 
-        studentIndex = intent.getIntExtra("studentIndex", -1);
 
         edtName.setText(name);
         edtStudentID.setText(studentID);
 
-        if (gender.contains("男"))
-            radioGroupGender.check(rbtnMale.getId());
-        else
-            radioGroupGender.check(rbtnFemale.getId());
+        if (gender != null) {
+            if (gender.equals("男")) {
+                radioGroupGender.check(rbtnMale.getId());
+            } else {
+                radioGroupGender.check(rbtnFemale.getId());
+            }
+        }
+
+        if (birthDate != null) {
+            String[] date = birthDate.split("-");
+            day = Integer.parseInt(date[2]);
+            month = Integer.parseInt(date[1]);
+            year = Integer.parseInt(date[0]);
+            datePicker.updateDate(year, month - 1, day);
+        }
 
         spnCollege.setSelection(adapterCollege.getPosition(college));
-        adapterCollege.notifyDataSetChanged();
 
-
-        if (hobbies.toString().contains("文学"))
-            chkLiterature.setChecked(true);
-        if (hobbies.toString().contains("体育"))
-            chkSports.setChecked(true);
-        if (hobbies.toString().contains("音乐"))
-            chkMusic.setChecked(true);
-        if (hobbies.toString().contains("美术"))
-            chkArt.setChecked(true);
+        if (hobbies != null) {
+            if (hobbies.contains("文学")) chkLiterature.setChecked(true);
+            if (hobbies.contains("体育")) chkSports.setChecked(true);
+            if (hobbies.contains("音乐")) chkMusic.setChecked(true);
+            if (hobbies.contains("美术")) chkArt.setChecked(true);
+        }
 
         spnCollege.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 1) {
-                    spnMajor.setAdapter(adapterMajorComputer);
-                } else if (position == 2) {
-                    spnMajor.setAdapter(adapterMajorElectric);
-                } else if (position == 3) {
-                    spnMajor.setAdapter(adapterMajorMechanic);
-                } else if (position == 4) {
-                    spnMajor.setAdapter(adapterMajorMaterial);
-                } else if (position == 5) {
-                    spnMajor.setAdapter(adapterMajorChemistry);
-                } else {
-                    spnMajor.setAdapter(adapterNoCo);
+                switch (position) {
+                    case 1:
+                        spnMajor.setAdapter(adapterMajorComputer);
+                        break;
+                    case 2:
+                        spnMajor.setAdapter(adapterMajorElectric);
+                        break;
+                    case 3:
+                        spnMajor.setAdapter(adapterMajorMechanic);
+                        break;
+                    case 4:
+                        spnMajor.setAdapter(adapterMajorMaterial);
+                        break;
+                    case 5:
+                        spnMajor.setAdapter(adapterMajorChemistry);
+                        break;
+                    default:
+                        spnMajor.setAdapter(adapterNoCo);
+                        break;
                 }
-
+                if (major != null) {
+                    spnMajor.setSelection(((ArrayAdapter) spnMajor.getAdapter()).getPosition(major));
+                }
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
+            public void onNothingSelected(AdapterView<?> parent) {
             }
         });
 
+        btnReset.setOnClickListener(view -> {
+            edtName.setText("");
+            edtStudentID.setText("");
+            radioGroupGender.check(R.id.rbtnMale);
+            spnCollege.setSelection(0);
+            spnMajor.setSelection(0);
+            chkLiterature.setChecked(false);
+            chkSports.setChecked(false);
+            chkMusic.setChecked(false);
+            chkArt.setChecked(false);
+            Toast.makeText(ActivityEdit.this, "重置成功", Toast.LENGTH_SHORT).show();
+        });
+
+        btnSubmit.setOnClickListener(v -> {
+            String name1 = edtName.getText().toString();
+            String studentID1 = edtStudentID.getText().toString();
+            String gender1 = ((RadioButton) findViewById(radioGroupGender.getCheckedRadioButtonId())).getText().toString();
+            String college1 = spnCollege.getSelectedItem().toString();
+            String major1 = spnMajor.getSelectedItem().toString();
+            StringBuilder hobbies1 = new StringBuilder();
+            day = datePicker.getDayOfMonth();
+            month = datePicker.getMonth();
+            year = datePicker.getYear();
+            String date = year + "-" + month + "-" + day;
+            if (chkLiterature.isChecked()) hobbies1.append(chkLiterature.getText().toString()).append(" ");
+            if (chkSports.isChecked()) hobbies1.append(chkSports.getText().toString()).append(" ");
+            if (chkMusic.isChecked()) hobbies1.append(chkMusic.getText().toString()).append(" ");
+            if (chkArt.isChecked()) hobbies1.append(chkArt.getText().toString()).append(" ");
+
+            if (name1.isEmpty() || studentID1.isEmpty() || college1.equals("学院") || major1.equals("专业") || hobbies1.length() == 0) {
+                Toast.makeText(ActivityEdit.this, "请将信息补充完整", Toast.LENGTH_SHORT).show();
+            } else {
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("name", name1);
+                resultIntent.putExtra("studentID", studentID1);
+                resultIntent.putExtra("gender", gender1);
+                resultIntent.putExtra("college", college1);
+                resultIntent.putExtra("major", major1);
+                resultIntent.putExtra("birthDate", date);
+                resultIntent.putExtra("hobbies", hobbies1.toString());
+                resultIntent.putExtra("position", getIntent().getIntExtra("position", -1));
+                resultIntent.putExtra("studentIndex", studentIndex);
+                setResult(RESULT_OK, resultIntent);
+                finish();
+            }
+        });
     }
 }
